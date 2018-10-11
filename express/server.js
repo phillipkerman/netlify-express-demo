@@ -8,11 +8,11 @@ const bodyParser = require('body-parser');
 
 const router = express.Router();
 router.get('/', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write('<h1>is express</h1>');
-  res.send()
-  // res.sendFile(__dirname + '/chat.html');
-  res.end();
+  //res.writeHead(200, { 'Content-Type': 'text/html' });
+ // res.write('<h1>is express</h1>');
+ // res.send()
+   res.sendFile('/chat.html');
+ // res.end();
 });
 router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
 router.post('/', (req, res) => res.json({ postBody: req.body }));
@@ -22,7 +22,7 @@ app.use('/.netlify/functions/server', router);  // path must route to lambda
 
 
 const http = serverless(app);
-/*
+
 var io = require('socket.io')(http);
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -37,7 +37,7 @@ io.on('connection', function(socket){
       console.log( loc )
   })
 });
-*/
+
 
 module.exports = app;
 module.exports.handler = serverless(app);
