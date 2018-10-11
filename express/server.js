@@ -40,4 +40,4 @@ io.on('connection', function(socket){
 
 
 module.exports = app;
-module.exports.handler = http;
+module.exports.handler = serverless(app);
