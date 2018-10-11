@@ -16,30 +16,42 @@ io.on('connection', function(socket){
   })
 });
 */
-const WebSocket = require('ws');
+function doMyFunction(){
 
-const wss = new WebSocket.Server({ port: 8080 });
+  const WebSocket = require('ws');
 
-// Broadcast to all.
-wss.broadcast = function broadcast(data) {
-  wss.clients.forEach(function each(client) {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(data);
-    }
-  });
-};
+  const wss = new WebSocket.Server({ port: 8080 });
 
-wss.on('connection', function connection(ws) {
-
-
-  ws.on('message', function incoming(data) {
-    // Broadcast to everyone else.
+  // Broadcast to all.
+  wss.broadcast = function broadcast(data) {
     wss.clients.forEach(function each(client) {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
+      if (client.readyState === WebSocket.OPEN) {
         client.send(data);
       }
     });
-  });
-});
+  };
 
-module.exports = wss;
+  wss.on('connection', function connection(ws) {
+
+
+    ws.on('message', function incoming(data) {
+      // Broadcast to everyone else.
+      wss.clients.forEach(function each(client) {
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
+          client.send(data);
+        }
+      });
+    });
+  });
+
+}
+//module.exports = wss;
+exports.handler = function(event, context, callback) {
+  // your server-side functionality
+  doMyFunction()
+  callback(null, {
+    statusCode: 200,
+    body: "Hello, World"
+    });
+  
+}
