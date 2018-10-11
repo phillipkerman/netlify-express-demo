@@ -6,11 +6,10 @@ const bodyParser = require('body-parser');
 
 const router = express.Router();
 router.get('/', (req, res) => {
- /* res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write('<h1>working</h1>');
-  */
-  res.sendFile(__dirname + '/chat.html');
-  //res.end();
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write('<h1>'+__dirname+'</h1>');
+  // res.sendFile(__dirname + '/chat.html');
+  res.end();
 });
 router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
 router.post('/', (req, res) => res.json({ postBody: req.body }));
