@@ -16,6 +16,8 @@ io.on('connection', function(socket){
   })
 });
 */
+
+/*
 function doMyFunction(){
 
   const WebSocket = require('ws');
@@ -45,13 +47,17 @@ function doMyFunction(){
   });
 
 }
+*/
+function getResult(){
+  return "result!"
+}
 //module.exports = wss;
 exports.handler = function(event, context, callback) {
   // your server-side functionality
-  doMyFunction()
+ const result= getResult()
   callback(null, {
     statusCode: 200,
-    body: "Hello, World"
+    body: "Hello, World"+result
     });
   
 }
