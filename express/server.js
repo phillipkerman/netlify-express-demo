@@ -4,6 +4,8 @@ const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
 
+
+
 const router = express.Router();
 router.get('/', (req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -17,5 +19,25 @@ router.post('/', (req, res) => res.json({ postBody: req.body }));
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
 
+
+const http = serverless(app);
+
+var io = require('socket.io')(http);
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+  socket.on('chat message',(msg)=>{
+      console.log( msg )
+  })
+  socket.on('cursor loc',(loc)=>{
+      console.log( loc )
+  })
+});
+
+
 module.exports = app;
-module.exports.handler = serverless(app);
+module.exports.handler = http;
