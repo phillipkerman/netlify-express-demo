@@ -58,7 +58,7 @@ exports.handler = function(event, context, callback) {
   
   callback(null, {
     statusCode: 200,
-    type: 'application/json',
+    contentType: 'application/json',
     body: JSON.stringify({someObj:'val'})
     });
   
