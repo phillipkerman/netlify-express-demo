@@ -57,7 +57,9 @@ exports.handler = function(event, context, callback) {
  const result= doMyFunction()
   callback(null, {
     statusCode: 200,
-    body: "Hello, World"+result
+    type: 'application/json',
+    body: "Hello, World"+result,
+    data: JSON.stringify( {someObj:"prop"} )
     });
   
 }
