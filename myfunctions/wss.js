@@ -54,7 +54,7 @@ function getResult(){
 //module.exports = wss;
 exports.handler = function(event, context, callback) {
   // your server-side functionality
-  doMyFunction()
+  //doMyFunction()
   
   callback(null, {
     statusCode: 200,
