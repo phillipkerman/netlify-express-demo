@@ -54,11 +54,12 @@ function getResult(){
 //module.exports = wss;
 exports.handler = function(event, context, callback) {
   // your server-side functionality
- const result= doMyFunction()
+  doMyFunction()
+  
   callback(null, {
     statusCode: 200,
     type: 'application/json',
-    body: "Hello, World"+result,
+    body: "Hello, World",
     data: JSON.stringify( {someObj:"prop"} )
     });
   
